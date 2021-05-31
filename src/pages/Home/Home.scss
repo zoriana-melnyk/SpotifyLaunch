@@ -1,0 +1,93 @@
+.App {
+  text-align: center;
+}
+
+.navbar-style{
+  background-color: #030303;
+}
+
+.App-body {
+  background-color: #030303;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Main-app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Log-button{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Login-button{
+  // margin: 0px 0px 500px 950px;
+  border: 1px;
+  border-radius: 5px;
+  padding: 6px 16px 6px 16px;
+  font-size: 14px;
+  background-color: rgb(119, 179, 0);
+  border-color: rgb(119, 179, 0);
+  color: rgb(255, 255, 255);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-name{
+  color: rgb(97, 218, 251);
+}
+
+.App-link {
+  color: rgb(97, 218, 251);
+  margin-left: -100px;
+  padding-left: 70px;
+}
+
+.App-search{
+  color: rgb(173, 175, 174);
+  text-transform: capitalize;
+}
+
+.Help-text{
+  color: rgb(255, 255, 255);
+  text-transform: none;
+}
+
+.Button-search{
+  border-color: rgb(119, 179, 0);
+  color: rgb(119, 179, 0);
+  margin: -140px 0px 0px 220px;  
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    width: 80px;
+    height: 80px;
+    // margin: 36px auto;
+  }
+}
+
+.App-content{
+  color: rgb(173, 175, 174);
+  margin: 50px;
+  // justify-content: center;
+}
+
