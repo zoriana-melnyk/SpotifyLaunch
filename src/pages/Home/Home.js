@@ -1,72 +1,79 @@
-import { useState } from 'react';
-import { spotifyApi } from '../../api/spotifyApi';
-import { InputField } from '../../components';
-import SpotifyLogin from 'react-spotify-login';
-import { Button, Navbar, CardDeck, Card, Alert, Spinner } from 'react-bootstrap';
+import { useState } from "react";
+import { spotifyApi } from "../../api/spotifyApi";
+import { InputField } from "../../components";
+import SpotifyLogin from "react-spotify-login";
+import {
+  Button,
+  Navbar,
+  CardDeck,
+  Card,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
 import { useLocation, useHistory } from "react-router-dom";
 
 // media
-import logo from '../../assets/images/logo.png';
+import logo from "../../assets/images/logo.png";
 
 // styles
-import './Home.scss';
+import "./Home.scss";
 
 const storeAuth = (userData) => {
   const { access_token, expires_in, token_type } = userData;
-  localStorage.setItem('access_token', access_token)
-  localStorage.setItem('expires_in', expires_in)
-  localStorage.setItem('token_type', token_type)
-}
+  localStorage.setItem("access_token", access_token);
+  localStorage.setItem("expires_in", expires_in);
+  localStorage.setItem("token_type", token_type);
+};
 
 const getAuthData = () => {
   return {
-    access_token: localStorage.getItem('access_token'),
-    expires_in: localStorage.getItem('expires_in'),
-    token_type: localStorage.getItem('token_type'),
-  }
-}
+    access_token: localStorage.getItem("access_token"),
+    expires_in: localStorage.getItem("expires_in"),
+    token_type: localStorage.getItem("token_type"),
+  };
+};
 
 const resetAuthData = () => {
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('expires_in')
-  localStorage.removeItem('token_type')
-}
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("expires_in");
+  localStorage.removeItem("token_type");
+};
 
 function Home() {
-  const location = useLocation()
+  const location = useLocation();
   const history = useHistory();
 
-  const [search, setSearch] = useState(location.search.split('=')[1]);
+  const [search, setSearch] = useState(location.search.split("=")[1]);
   const userData = getAuthData();
   const [access, setAccess] = useState(userData);
   const [isNotFound, setIsNotFound] = useState(false);
   const [show, setShow] = useState({
     loading: false,
-    tracks: []
+    tracks: [],
   });
 
   const fetchSong = async (searchStr) => {
     try {
       setShow({
         ...show,
-        loading: true
+        loading: true,
       });
-      setIsNotFound(false)
+      setIsNotFound(false);
       const res = await spotifyApi.search(searchStr, access);
-      setIsNotFound(!res.tracks.items.length)
+      setIsNotFound(!res.tracks.items.length);
       setShow({
         ...show,
         tracks: res.tracks,
-        loading: false
-      })
+        loading: false,
+      });
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   const onChange = (event) => {
-    setSearch(event.target.value)
-  }
+    setSearch(event.target.value);
+  };
   const onSearchStart = (event) => {
     event.preventDefault();
     if (!search) {
@@ -74,40 +81,45 @@ function Home() {
     }
     history.push({
       pathname: "/",
-      search: `?seach=${search}`
-    })
+      search: `?seach=${search}`,
+    });
     fetchSong(search);
-  }
+  };
 
   const logout = () => {
     resetAuthData();
-    setAccess(getAuthData())
-  }
+    setAccess(getAuthData());
+  };
 
   const onTrackRedirect = (id) => {
-    history.push("/tracks/" + id)
-  }
+    history.push("/tracks/" + id);
+  };
 
   return (
     <div className="App-body">
       <header className="Log-button">
         <Navbar expand="sm" className="navbar-style">
-          {
-            access.access_token
-              ? <Button variant="danger" onClick={() => logout()}>Logout</Button>
-              : <SpotifyLogin clientId={'2c0f0ec6214c4b9aa72ab17b8d613c6d'} className="Login-button"
-                  redirectUri={'http://localhost:3000'}
-                  onSuccess={function (Success) {
-                    setAccess(Success)
-                    storeAuth(Success)
-                    // service to store auth data locally
-                  }}
-                  onFailure={(Fail) => {
-                    // console.log(Fail);
-                    // service to remove auth data from localStorage
-                    alert(Fail)
-                  }} />
-          }
+          {access.access_token ? (
+            <Button variant="danger" onClick={() => logout()}>
+              Logout
+            </Button>
+          ) : (
+            <SpotifyLogin
+              clientId={"2c0f0ec6214c4b9aa72ab17b8d613c6d"}
+              className="Login-button"
+              redirectUri={window.origin}
+              onSuccess={function (Success) {
+                setAccess(Success);
+                storeAuth(Success);
+                // service to store auth data locally
+              }}
+              onFailure={(Fail) => {
+                // console.log(Fail);
+                // service to remove auth data from localStorage
+                alert(Fail);
+              }}
+            />
+          )}
         </Navbar>
       </header>
 
@@ -116,7 +128,14 @@ function Home() {
           <img src={logo} className="App-logo" alt="logo" />
           <div className="App-name">
             <p>
-              <a className="App-link" href="https://any-api.com/spotify_com/spotify_com/docs/API_Description" rel="noreferrer" target="_blank">Spotify Surfing</a>
+              <a
+                className="App-link"
+                href="https://any-api.com/spotify_com/spotify_com/docs/API_Description"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Spotify Surfing
+              </a>
             </p>
           </div>
         </div>
@@ -125,57 +144,60 @@ function Home() {
           <form onSubmit={(e) => onSearchStart(e)}>
             <InputField onChange={onChange} value={search} />
             <h6 className="Help-text">Enter search query</h6>
-            <Button type={"submit"} variant="outline-success" className="Button-search">Search</Button>
+            <Button
+              type={"submit"}
+              variant="outline-success"
+              className="Button-search"
+            >
+              Search
+            </Button>
           </form>
         </div>
-        {
-          !show.tracks && search && isNotFound
-            ? <Alert variant="info">
-              <Alert.Heading>Info message</Alert.Heading>
-              <p>
-                There is no song with this name
-              </p>
-            </Alert>
-            : null
-        }
-        {
-          show.loading
-            ? <Spinner animation="border" role="status">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-            : null
-        }
+        {!show.tracks && search && isNotFound ? (
+          <Alert variant="info">
+            <Alert.Heading>Info message</Alert.Heading>
+            <p>There is no song with this name</p>
+          </Alert>
+        ) : null}
+        {show.loading ? (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        ) : null}
 
-        {
-          !access.access_token && search
-            ? <Alert variant="danger">
-              <Alert.Heading>Authorization error!</Alert.Heading>
-              <p>
-                You are not logged in.
-                Please login and try again.
-              </p>
-            </Alert>
-            : null
-        }
+        {!access.access_token && search ? (
+          <Alert variant="danger">
+            <Alert.Heading>Authorization error!</Alert.Heading>
+            <p>You are not logged in. Please login and try again.</p>
+          </Alert>
+        ) : null}
         <div className="App-content">
           <CardDeck>
             {show.tracks.items
-              ? show.tracks.items.map(item => {
-                return <div key={item.id}>
-                  <Card style={{ width: '18rem', marginBottom: '1em' }}>
-                    <Card.Body>
-                      <Card.Img variant="top" alt={item.name} src={item.album.images[0].url} ></Card.Img>
-                      <Card.Title>
-                        <h3>{item.name}</h3>
-                      </Card.Title>
-                      <Card.Footer>
-                        <Button onClick={() => onTrackRedirect(item.id)}>Info</Button>
-                        {/* <audio>{item.preview_url}</audio> */}
-                      </Card.Footer>
-                    </Card.Body>
-                  </Card>
-                </div>
-              })
+              ? show.tracks.items.map((item) => {
+                  return (
+                    <div key={item.id}>
+                      <Card style={{ width: "18rem", marginBottom: "1em" }}>
+                        <Card.Body>
+                          <Card.Img
+                            variant="top"
+                            alt={item.name}
+                            src={item.album.images[0].url}
+                          ></Card.Img>
+                          <Card.Title>
+                            <h3>{item.name}</h3>
+                          </Card.Title>
+                          <Card.Footer>
+                            <Button onClick={() => onTrackRedirect(item.id)}>
+                              Info
+                            </Button>
+                            {/* <audio>{item.preview_url}</audio> */}
+                          </Card.Footer>
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  );
+                })
               : null}
           </CardDeck>
         </div>
