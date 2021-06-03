@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.navbar-style{
+.navbar-style {
   background-color: #030303;
 }
 
@@ -13,20 +13,19 @@
   color: white;
 }
 
-.Main-app{
+.Main-app {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.Log-button{
+.Log-button {
   display: flex;
   justify-content: flex-end;
 }
 
-.Login-button{
-  // margin: 0px 0px 500px 950px;
+.Login-button {
   border: 1px;
   border-radius: 5px;
   padding: 6px 16px 6px 16px;
@@ -41,7 +40,7 @@
   pointer-events: none;
 }
 
-.App-name{
+.App-name {
   color: rgb(97, 218, 251);
 }
 
@@ -51,20 +50,20 @@
   padding-left: 70px;
 }
 
-.App-search{
+.App-search {
   color: rgb(173, 175, 174);
   text-transform: capitalize;
 }
 
-.Help-text{
+.Help-text {
   color: rgb(255, 255, 255);
   text-transform: none;
 }
 
-.Button-search{
+.Button-search {
   border-color: rgb(119, 179, 0);
   color: rgb(119, 179, 0);
-  margin: -140px 0px 0px 220px;  
+  margin: -140px 0px 0px 190px;
 }
 
 @keyframes App-logo-spin {
@@ -85,9 +84,14 @@
   }
 }
 
-.App-content{
+.App-content {
   color: rgb(173, 175, 174);
   margin: 50px;
   // justify-content: center;
 }
 
+.Text-Style {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #c7c2c2;
+}

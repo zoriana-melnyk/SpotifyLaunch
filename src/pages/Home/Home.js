@@ -96,7 +96,7 @@ function Home() {
   };
 
   return (
-    <div className="App-body">
+    <div>
       <header className="Log-button">
         <Navbar expand="sm" className="navbar-style">
           {access.access_token ? (
@@ -177,22 +177,35 @@ function Home() {
               ? show.tracks.items.map((item) => {
                   return (
                     <div key={item.id}>
-                      <Card style={{ width: "18rem", marginBottom: "1em" }}>
+                      <Card
+                        bg="dark"
+                        text="white"
+                        style={{
+                          width: "14rem",
+                          marginBottom: "1em",
+                        }}
+                      >
                         <Card.Body>
                           <Card.Img
                             variant="top"
                             alt={item.name}
                             src={item.album.images[0].url}
                           ></Card.Img>
-                          <Card.Title>
-                            <h3>{item.name}</h3>
+                          <Card.Title className="Text-Style">
+                            <h4>{item.name}</h4>
                           </Card.Title>
-                          <Card.Footer>
-                            <Button onClick={() => onTrackRedirect(item.id)}>
-                              Info
-                            </Button>
-                            {/* <audio>{item.preview_url}</audio> */}
-                          </Card.Footer>
+                          <Button
+                            onClick={() => onTrackRedirect(item.id)}
+                            style={{
+                              marginLeft: "5em",
+                              backgroundColor: "yellow",
+                              color: "dark",
+                              fontWeight: "400px",
+                            }}
+                            variant="flat"
+                          >
+                            Info
+                          </Button>
                         </Card.Body>
                       </Card>
                     </div>

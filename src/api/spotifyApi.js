@@ -13,6 +13,7 @@ const spotifyApi = {
       params: {
         q: str,
         type: "track",
+        limit: 5,
       },
     });
   },
