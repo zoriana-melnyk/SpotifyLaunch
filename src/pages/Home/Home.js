@@ -140,30 +140,30 @@ function Home() {
           </div>
         </div>
 
-        <div className="App-search">
+        <div>
           <form onSubmit={(e) => onSearchStart(e)}>
             <InputField onChange={onChange} value={search} />
             <h6 className="Help-text">Enter search query</h6>
-            <Button
-              type={"submit"}
-              variant="outline-success"
-              className="Button-search"
-            >
-              Search
-            </Button>
+            <Button type={"submit"} variant="outline-success" className="Button-search">Search</Button>
           </form>
         </div>
-        {!show.tracks && search && isNotFound ? (
-          <Alert variant="info">
-            <Alert.Heading>Info message</Alert.Heading>
-            <p>There is no song with this name</p>
-          </Alert>
-        ) : null}
-        {show.loading ? (
-          <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        ) : null}
+        {
+          !show.tracks && search && isNotFound
+            ? <Alert variant="info">
+              <Alert.Heading>Info message</Alert.Heading>
+              <p>
+                There is no song with this name
+              </p>
+            </Alert>
+            : null
+        }
+        {
+          show.loading
+            ? <Spinner animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+            : null
+        }
 
         {!access.access_token && search ? (
           <Alert variant="danger">
@@ -177,34 +177,13 @@ function Home() {
               ? show.tracks.items.map((item) => {
                   return (
                     <div key={item.id}>
-                      <Card
-                        bg="dark"
-                        text="white"
-                        style={{
-                          width: "14rem",
-                          marginBottom: "1em",
-                        }}
-                      >
+                      <Card bg="dark" text="white" style={{width: "14rem", marginBottom: "1em",}}>
                         <Card.Body>
-                          <Card.Img
-                            variant="top"
-                            alt={item.name}
-                            src={item.album.images[0].url}
-                          ></Card.Img>
+                          <Card.Img variant="top" alt={item.name} src={item.album.images[0].url}></Card.Img>
                           <Card.Title className="Text-Style">
                             <h4>{item.name}</h4>
                           </Card.Title>
-                          <Button
-                            onClick={() => onTrackRedirect(item.id)}
-                            style={{
-                              marginLeft: "5em",
-                              backgroundColor: "yellow",
-                              color: "dark",
-                              fontWeight: "400px",
-                            }}
-                            variant="flat"
-                          >
-                            Info
+                          <Button className="btn-block Info-button" onClick={() => onTrackRedirect(item.id)}>Info
                           </Button>
                         </Card.Body>
                       </Card>

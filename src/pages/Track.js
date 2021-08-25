@@ -24,6 +24,10 @@ export const Track = ({ history }) => {
     return <h1>Loading...</h1>;
   }
 
+  const goBack = () => {
+    window.history.back();
+  }
+
   const convertTime = (duration) => {
     var seconds = parseInt((duration / 1000) % 60),
       minutes = parseInt((duration / (1000 * 60)) % 60);
@@ -37,11 +41,7 @@ export const Track = ({ history }) => {
   const RedirectToSpotify = (id) => {
     history.push("/spotify/" + id);
   };
-
-  const GoBack = (id) => {
-    history.push("/spotify/" + id);
-  };
-
+  
   return (
     <div className="Card-style d-flex justify-content-center">
       <Card
@@ -55,10 +55,8 @@ export const Track = ({ history }) => {
         <div>
           <Card.Body className="Card-body-style d-flex flex-column justify-content-center">
             <Card.Img
-              // className="Img-style justify-content-center"
               className="Img-style w-50 mx-auto"
               variant="top"
-              // alignment="center"
               alt={track.name}
               src={track.album.images[0].url}
             ></Card.Img>
@@ -75,17 +73,10 @@ export const Track = ({ history }) => {
             <Button
               className="GoToSpotify-button"
               onClick={() => RedirectToSpotify(track.id)}
-              // variant="flat"
             >
               Listen on Spotify
             </Button>
-            <Button
-              className="GoBack-button"
-              onClick={() => GoBack(track.id)}
-              // variant="flat"
-            >
-              Go Back
-            </Button>
+            <Button className="GoBack-button" onClick={() => goBack()}>Go back</Button>
           </Card.Body>
         </div>
       </Card>
