@@ -23,6 +23,7 @@
 .Log-button {
   display: flex;
   justify-content: flex-end;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .Login-button {
@@ -33,6 +34,7 @@
   background-color: rgb(119, 179, 0);
   border-color: rgb(119, 179, 0);
   color: rgb(255, 255, 255);
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App-logo {
@@ -48,22 +50,26 @@
   color: rgb(97, 218, 251);
   margin-left: -100px;
   padding-left: 70px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App-search {
-  color: rgb(173, 175, 174);
+  color: rgb(143, 141, 141);
   text-transform: capitalize;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .Help-text {
   color: rgb(255, 255, 255);
   text-transform: none;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .Button-search {
   border-color: rgb(119, 179, 0);
   color: rgb(119, 179, 0);
   margin: -140px 0px 0px 190px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @keyframes App-logo-spin {
@@ -87,11 +93,15 @@
 .App-content {
   color: rgb(173, 175, 174);
   margin: 50px;
-  // justify-content: center;
-}
-
-.Text-Style {
-  font-size: 1.5rem;
-  text-align: center;
-  color: #c7c2c2;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  .Info-button{
+    background-color: rgb(188, 243, 35);
+    border: rgb(207, 192, 107);
+    color: rgb(59, 58, 58);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    &:hover{
+      background-color: dimgrey;
+    }
+  }
 }

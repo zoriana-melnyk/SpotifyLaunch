@@ -31,6 +31,14 @@ ReactDOM.render(
           <Route path="*">
             <p>not found</p>
           </Route>
+
+          <Route
+            exact
+            path="/spotify/:id"
+            render={(props) => {
+              return <Track history={props} />;
+            }}
+          ></Route>
         </Switch>
       </Router>
     </div>
