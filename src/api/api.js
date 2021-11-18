@@ -22,9 +22,7 @@ const api = {
    request(options) {
       return axiosInstance(options)
          .then(res => res.data)
-         .catch(async error => {
-            console.error(error);
-         })
+         .catch(err => {throw new Error(err)})
    }
 };
 

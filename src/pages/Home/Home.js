@@ -60,6 +60,7 @@ function Home() {
       });
       setIsNotFound(false);
       const res = await spotifyApi.search(searchStr, access);
+      console.log({res});
       setIsNotFound(!res.tracks.items.length);
       setShow({
         ...show,
@@ -67,7 +68,8 @@ function Home() {
         loading: false,
       });
     } catch (e) {
-      console.error(e);
+      alert(e)
+      // console.error(e);
     }
   };
 
